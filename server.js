@@ -36,11 +36,12 @@ app.get("/all", function (req, res) {
 
 // Scrape data from "comicbookmovie.com" and place it into the database
 app.get("/scrape", function (req, res) {
-    request("https://www.comicbookmovie.com/news/", function (error, response, html) {
+    request("https://www.cbr.com/category/movies/news-movies/", function (error, response, html) {
         var $ = cheerio.load(html);
-        $(".headline").each(function (i, element) {
-            var headline = $(element).children("a").text();
+        $(".title").each(function (i, element) {
+            var title = $(element).children("a").text();
             var link = $(element).children("a").attr("href");
+            console.log(title, link);
            //var picture = $(element).children("a").attr("img");
 
             if (title, link ) {
@@ -68,6 +69,6 @@ app.get("/scrape", function (req, res) {
 
 
 // Listen on port 3000
-app.listen(27017, function () {
-    console.log("App running on port 27017!")
+app.listen(3000, function () {
+    console.log("App running on port 3000!")
 });
